@@ -1,13 +1,14 @@
-# projeto de um jogo da forca em python para aprendizado
+# Projeto de um jogo da forca em python para aprendizado
 
-# import
-import random
+# Import
+from tkinter import *
+import random   
 from os import system, name
 
 # Função para limpar a tela de execução
 def limpa_tela():
 
-    #windows
+    # Windows
     if (name == 'nt'):
         _ = system('cls')
     
@@ -18,10 +19,11 @@ def limpa_tela():
 # Função
 def game():
 
-    limpa_tela()
-    print("\nBem-vinde ao jogo da forca!")
-    print("Adivinhe a palavra abaixo:\n")
-    print("Tema: Fruta\n")
+    
+    janela_de_jogo = Tk()
+    janela_de_jogo.title("Jogo da forca")
+    texto_inicial = Label(janela_de_jogo, text = "\nBem-vinde ao jogo da forca! \nAdivinhe a palavra abaixo:\nTema: Fruta\n")
+    texto_inicial.grid(column = 0, row = 0, padx = 10, pady = 10)
 
     # Lista de palavras para o jogo
     palavras = ['banana', 'abacate', 'uva', 'morango', 'laranja', 'mamao', 'pera', 'maca', 'kiwi']
@@ -42,9 +44,14 @@ def game():
     while chances > 0:
         
         # print
-        print(" ".join(letras_descobertas))
-        print("\nChances restantes: ", chances)
-        print("Letras erradas:", ", ".join(letras_erradas))
+        texto = Label(janela_de_jogo, text =" ".join(letras_descobertas))
+        texto.grid(column = 0, row = 1, padx = 10, pady = 10)
+        
+        texto = Label(janela_de_jogo, text = "\nChances restantes: " + str(chances))
+        texto.grid(column = 0, row = 2, padx = 10, pady = 10)
+        
+        texto = Label(janela_de_jogo, text = "Letras erradas:" + ", ".join(letras_erradas))
+        texto.grid(column = 0, row = 3, padx = 10, pady = 10)
 
         # Tentativa
         tentativa = input("\nDigite uma letra: ").lower()
@@ -62,7 +69,8 @@ def game():
 
         # Condicional
         if "_" not in letras_descobertas:
-            print("\nVocê venceu! A palavra era:", palavra)
+            texto = Label(janela_de_jogo, print("\nVocê venceu! A palavra era:", palavra))
+            texto.grid(column = 0, row = 4, padx = 10, pady = 10)
             break
     
     # Condicional
